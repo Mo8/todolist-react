@@ -6,13 +6,16 @@ function TodoList() {
   const [tasks, setTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
   const [contacts, setContacts] = useState([]);
-  const props = ['name', 'email', 'tel', 'address', 'icon'];
-  const opts = {multiple: true};
   const contactSupported = ('contacts' in navigator && 'ContactsManager' in window);
   const initContacts = async () => {
     console.log("test");
-    if(contactSupported)
-    setContacts(await navigator.contacts.select(props,opts));
+    if(contactSupported){
+      const properties = await navigator.contacts.getProperties();
+      console.log(properties);
+      const contacts = await navigator.contacts.select(properties,{multiple: true});
+      console.log(contacts);
+      setContacts(contacts);
+    }
   }
   if(contacts === null)
     initContacts();
@@ -89,7 +92,7 @@ function TodoList() {
         {contacts.map((contact, index) => (
           <li key={index}>
             
-            {contact.name}
+            {contact}
           </li>
         ))}
       </ul>
