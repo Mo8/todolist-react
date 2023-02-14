@@ -17,8 +17,6 @@ function TodoList() {
       setContacts(contacts);
     }
   }
-  if(contacts === null)
-    initContacts();
 
   const addTask = () => {
     if (newTask.trim() !== '') {
@@ -87,12 +85,11 @@ function TodoList() {
           </li>
         ))}
       </ul>
-      <h2>Contacts</h2>
+      <h2>Contacts {contacts.length} <button onClick={initContacts}>Load contacts</button></h2>
       <ul>
         {contacts.map((contact, index) => (
-          <li key={index}>
-            
-            {contact}
+          <li key={index}>            
+            {contact.name[0]} - {contact.tel[0]}
           </li>
         ))}
       </ul>
