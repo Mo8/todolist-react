@@ -93,6 +93,7 @@ function TodoList() {
           </li>
         ))}
       </ul>
+      {contactSupported?"oui":"non"}
     </div>
   );
 }
